@@ -1,0 +1,6 @@
+framework module Pods_winningstar1 {
+  umbrella header "Pods-winningstar1-umbrella.h"
+
+  export *
+  module * { export * }
+}
