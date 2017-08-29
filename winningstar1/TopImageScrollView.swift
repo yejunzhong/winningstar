@@ -17,21 +17,21 @@ class TopImageScrollView: UIScrollView,UIScrollViewDelegate {
         // Drawing code
     }
     */
-    var dataSource:TopImageScrollViewDataSource?
+    var dataSource:NSMutableArray?
     var pageC : UIPageControl?
     var timer :Timer?
     func setUI() {
         //print(1)
-        dataSource = TopImageScrollViewDataSource()
+        dataSource = TopImageScrollViewDataSource().imageUrlArray
         self.delegate = self
         self.isPagingEnabled = true
         self.showsHorizontalScrollIndicator = false
         let _ = self.subviews.map {
             $0.removeFromSuperview()
         }
-        self.addImageView(imageArray: (dataSource?.imageUrlArray)!)
-        //print(dataSource?.imageUrlArray!)
-    }
+        //print(dataSource!)
+        self.addImageView(imageArray: dataSource!)
+        }
     //配置scrollview循环滚动
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.x == 0 {
@@ -57,14 +57,16 @@ class TopImageScrollView: UIScrollView,UIScrollViewDelegate {
     }
     //给scroll加载图片
     fileprivate func addImageView(imageArray:NSArray){
+        print("wait1")
         for i in 0..<imageArray.count {
-            let urlStr = NSURL(string: imageArray[i] as! String)
-            let data = NSData(contentsOf:urlStr! as URL)
-            let image = UIImage(data: data! as Data)
+            //let urlStr = NSURL(string: imageArray[i] as! String)
+            //let data = NSData(contentsOf:urlStr! as URL)
+            let image = UIImage(data: imageArray[i] as! Data)
             let imageView = UIImageView(image: image)
             imageView.frame = CGRect(x: CGFloat(i) * ScreenWidth, y: 0, width: ScreenWidth, height: self.bounds.height)
             self.addSubview(imageView)
         }
+        print("wait2")
         self.contentSize = CGSize(width: CGFloat(imageArray.count) * ScreenWidth, height: 0)
         self.setContentOffset(CGPoint(x:ScreenWidth,y:0), animated: false)
         let rect = CGRect(x: (ScreenWidth - 200)/2, y: self.frame.maxY - 10 , width: 200, height: 10)

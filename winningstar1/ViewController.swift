@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     let topImageScrollView = TopImageScrollView()
+    var isinit = false
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "WinningStar"
@@ -17,11 +18,16 @@ class ViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        print("viewdidappear")
+        if !isinit{
         topImageScrollView.frame = CGRect(x: 0, y: 64, width: ScreenWidth, height: 150)
         self.view.addSubview(topImageScrollView)
         topImageScrollView.setUI()
         NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "I have got the fucking htmlText"), object: nil)
+            isinit = true
+        }
     }
+    
     func test() {
         topImageScrollView.setUI()
     }
