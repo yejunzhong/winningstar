@@ -20,18 +20,23 @@ class TopImageScrollView: UIScrollView,UIScrollViewDelegate {
     var dataSource:NSMutableArray?
     var pageC : UIPageControl?
     var timer :Timer?
-    func setUI() {
-        //print(1)
+    var timerflage = false
+    override func draw(_ rect: CGRect) {
         dataSource = TopImageScrollViewDataSource().imageUrlArray
         self.delegate = self
         self.isPagingEnabled = true
         self.showsHorizontalScrollIndicator = false
+        self.bounces = false
+        self.addImageView(imageArray: dataSource!)
+    }
+    func upData() {
+        dataSource = TopImageScrollViewDataSource().imageUrlArray
+        
         let _ = self.subviews.map {
             $0.removeFromSuperview()
         }
-        //print(dataSource!)
         self.addImageView(imageArray: dataSource!)
-        }
+    }
     //配置scrollview循环滚动
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.x == 0 {
@@ -44,10 +49,16 @@ class TopImageScrollView: UIScrollView,UIScrollViewDelegate {
         pageC?.currentPage = Int(scrollView.contentOffset.x / ScreenWidth) - 1
     }
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if timerflage{
         self.removeTimer()
+            timerflage = false
+        }
     }
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !timerflage{
         self.addTimer()
+            timerflage = true
+        }
     }
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.x == scrollView.contentSize.width - ScreenWidth {
@@ -57,16 +68,13 @@ class TopImageScrollView: UIScrollView,UIScrollViewDelegate {
     }
     //给scroll加载图片
     fileprivate func addImageView(imageArray:NSArray){
-        print("wait1")
         for i in 0..<imageArray.count {
-            //let urlStr = NSURL(string: imageArray[i] as! String)
-            //let data = NSData(contentsOf:urlStr! as URL)
             let image = UIImage(data: imageArray[i] as! Data)
             let imageView = UIImageView(image: image)
             imageView.frame = CGRect(x: CGFloat(i) * ScreenWidth, y: 0, width: ScreenWidth, height: self.bounds.height)
             self.addSubview(imageView)
         }
-        print("wait2")
+        
         self.contentSize = CGSize(width: CGFloat(imageArray.count) * ScreenWidth, height: 0)
         self.setContentOffset(CGPoint(x:ScreenWidth,y:0), animated: false)
         let rect = CGRect(x: (ScreenWidth - 200)/2, y: self.frame.maxY - 10 , width: 200, height: 10)
@@ -77,16 +85,18 @@ class TopImageScrollView: UIScrollView,UIScrollViewDelegate {
         pageC?.pageIndicatorTintColor = UIColor.gray
         pageC?.currentPage = 0
         self.superview?.addSubview(pageC!)
+        if !timerflage{
         timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true, block: { (timer) in
             self.change(timer: timer)
         })
+            timerflage = true
+        }
     }
     //定时翻页scrollview
     fileprivate func change(timer:Timer){
         if pageC?.currentPage == (pageC?.numberOfPages)! - 1 {
             self.setContentOffset(CGPoint(x:(CGFloat(pageC!.numberOfPages + 1)) * ScreenWidth, y:0), animated: true)
             pageC?.currentPage = 0
-            //self.setContentOffset(CGPoint(x: ScreenWidth, y:0), animated: false)
         } else if (pageC?.currentPage)! < (pageC?.numberOfPages)! - 1 {
             pageC?.currentPage += 1
             self.setContentOffset(CGPoint(x:(CGFloat(pageC!.currentPage + 1)) * ScreenWidth, y:0), animated: true)

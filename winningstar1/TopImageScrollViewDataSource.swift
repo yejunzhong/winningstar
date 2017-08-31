@@ -17,7 +17,6 @@ class TopImageScrollViewDataSource {
             let temArray: NSMutableArray = []
             let finalArray: NSMutableArray = []
             if let topImageUrls = self.Stringcut(htmlText, start: "<div class=\"index_box_po", end: "<span class=\"prev iconfont icon-back\"></span>"){
-                print(1)
                 var temUrls = topImageUrls
             for _ in 0..<10{
                 if let url = self.Stringcut(temUrls, start: "<li _src=\"url(", end: ")\" style="){
@@ -29,7 +28,6 @@ class TopImageScrollViewDataSource {
                 }
             }
             if temArray.count > 0{
-                //let a:NSMutableArray = []
                 let temArray2:NSMutableArray = []
                 for i in 0..<temArray.count{
                     let urlStr = NSURL(string: temArray[i] as! String)
@@ -44,7 +42,6 @@ class TopImageScrollViewDataSource {
             }
             
             if let a = defaults.object(forKey: "topImages") as? NSMutableArray{
-                print(2)
                 if finalArray == a{
                     return a
                 }else{
@@ -56,10 +53,7 @@ class TopImageScrollViewDataSource {
                 return finalArray
             }
             }else{//没有接收到htmltext的情况
-                //print("没有接收到htmltext的情况")
-                print(3)
                 if let a = defaults.object(forKey: "topImages") as? NSMutableArray{
-                    //print(a)
                     return a
             }
         }
