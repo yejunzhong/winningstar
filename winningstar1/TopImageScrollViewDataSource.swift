@@ -10,9 +10,6 @@ import Foundation
 
 class TopImageScrollViewDataSource {
     var imageUrlArray:NSMutableArray?{
-        set(newvalue){
-            defaults.set(newvalue, forKey: "topImages")
-        }
         get{
             let temArray: NSMutableArray = []
             let finalArray: NSMutableArray = []

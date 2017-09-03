@@ -17,6 +17,10 @@
 		2897FF9C1F56FC7200E00E39 /* BottonMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2897FF9B1F56FC7200E00E39 /* BottonMainView.swift */; };
 		2897FF9F1F58544C00E00E39 /* HouseholdGoodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2897FF9E1F58544C00E00E39 /* HouseholdGoodsView.swift */; };
 		2897FFA11F58547300E00E39 /* ElectronicGoodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2897FFA01F58547300E00E39 /* ElectronicGoodsView.swift */; };
+		2897FFA41F5991BA00E00E39 /* HouseholdBestAndNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2897FFA31F5991BA00E00E39 /* HouseholdBestAndNew.swift */; };
+		2897FFA61F59926A00E00E39 /* HouseholdDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2897FFA51F59926A00E00E39 /* HouseholdDataSource.swift */; };
+		2897FFAA1F59A4BD00E00E39 /* GoodsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2897FFA91F59A4BD00E00E39 /* GoodsCollectionView.swift */; };
+		2897FFAC1F5BAB7C00E00E39 /* GoodsCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2897FFAB1F5BAB7C00E00E39 /* GoodsCellCollectionViewCell.swift */; };
 		CB2EB1B97AF63DEF0FB27D1A /* Pods_winningstar1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA62C8FADD1E0DD4DFC7E959 /* Pods_winningstar1.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +38,10 @@
 		2897FF9B1F56FC7200E00E39 /* BottonMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottonMainView.swift; sourceTree = "<group>"; };
 		2897FF9E1F58544C00E00E39 /* HouseholdGoodsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HouseholdGoodsView.swift; sourceTree = "<group>"; };
 		2897FFA01F58547300E00E39 /* ElectronicGoodsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElectronicGoodsView.swift; sourceTree = "<group>"; };
+		2897FFA31F5991BA00E00E39 /* HouseholdBestAndNew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HouseholdBestAndNew.swift; sourceTree = "<group>"; };
+		2897FFA51F59926A00E00E39 /* HouseholdDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HouseholdDataSource.swift; sourceTree = "<group>"; };
+		2897FFA91F59A4BD00E00E39 /* GoodsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodsCollectionView.swift; sourceTree = "<group>"; };
+		2897FFAB1F5BAB7C00E00E39 /* GoodsCellCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodsCellCollectionViewCell.swift; sourceTree = "<group>"; };
 		6019EB8FF8877550DE6F8BF2 /* Pods-winningstar1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-winningstar1.debug.xcconfig"; path = "Pods/Target Support Files/Pods-winningstar1/Pods-winningstar1.debug.xcconfig"; sourceTree = "<group>"; };
 		FA62C8FADD1E0DD4DFC7E959 /* Pods_winningstar1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_winningstar1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -112,10 +120,22 @@
 		2897FF9D1F5853A300E00E39 /* GoodsSeriesView */ = {
 			isa = PBXGroup;
 			children = (
-				2897FF9E1F58544C00E00E39 /* HouseholdGoodsView.swift */,
+				2897FFA21F59912D00E00E39 /* HouseholdGoodsView */,
 				2897FFA01F58547300E00E39 /* ElectronicGoodsView.swift */,
 			);
 			name = GoodsSeriesView;
+			sourceTree = "<group>";
+		};
+		2897FFA21F59912D00E00E39 /* HouseholdGoodsView */ = {
+			isa = PBXGroup;
+			children = (
+				2897FF9E1F58544C00E00E39 /* HouseholdGoodsView.swift */,
+				2897FFA31F5991BA00E00E39 /* HouseholdBestAndNew.swift */,
+				2897FFA51F59926A00E00E39 /* HouseholdDataSource.swift */,
+				2897FFA91F59A4BD00E00E39 /* GoodsCollectionView.swift */,
+				2897FFAB1F5BAB7C00E00E39 /* GoodsCellCollectionViewCell.swift */,
+			);
+			name = HouseholdGoodsView;
 			sourceTree = "<group>";
 		};
 		4BC016778D64B831B245E73D /* Frameworks */ = {
@@ -260,8 +280,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2897FF991F53044F00E00E39 /* TopImageScrollViewDataSource.swift in Sources */,
+				2897FFAC1F5BAB7C00E00E39 /* GoodsCellCollectionViewCell.swift in Sources */,
 				2897FF971F5303F000E00E39 /* TopImageScrollView.swift in Sources */,
+				2897FFA41F5991BA00E00E39 /* HouseholdBestAndNew.swift in Sources */,
 				2897FF9C1F56FC7200E00E39 /* BottonMainView.swift in Sources */,
+				2897FFA61F59926A00E00E39 /* HouseholdDataSource.swift in Sources */,
+				2897FFAA1F59A4BD00E00E39 /* GoodsCollectionView.swift in Sources */,
 				2897FF9F1F58544C00E00E39 /* HouseholdGoodsView.swift in Sources */,
 				2897FF851F52C03200E00E39 /* ViewController.swift in Sources */,
 				2897FF831F52C03200E00E39 /* AppDelegate.swift in Sources */,

@@ -17,6 +17,9 @@ class HouseholdGoodsView: UIView {
         // Drawing code
     }
     */
+    let householdBestAndNewView = HouseholdBestAndNew()
+    let hotRecommendLabel = UILabel()
+    let newForYouLabel = UILabel()
     override func draw(_ rect: CGRect) {
         //******titleView*********
         let titleLabel = UILabel()
@@ -38,19 +41,23 @@ class HouseholdGoodsView: UIView {
         self.addSubview(goodsImageView)
         self.addSubview(goodsDescriptionLabel)
         //******选择标签*********
-        let hotRecommendLabel = UILabel()
+        
         hotRecommendLabel.frame = CGRect(x: 0, y: goodsImageView.frame.maxY, width: rect.width/2, height: 50)
         hotRecommendLabel.text = "HOT RECOMMEND"
         hotRecommendLabel.textColor = UIColor.white
         hotRecommendLabel.backgroundColor = UIColor.gray
         hotRecommendLabel.textAlignment = .center
         self.addSubview(hotRecommendLabel)
-        let newForYouLabel = UILabel()
+        
         newForYouLabel.frame = CGRect(x: rect.width/2, y: goodsImageView.frame.maxY, width: rect.width/2, height: 50)
         newForYouLabel.text = "NEW FOR YOU"
         newForYouLabel.textColor = UIColor.white
         newForYouLabel.backgroundColor = UIColor.gray
         newForYouLabel.textAlignment = .center
         self.addSubview(newForYouLabel)
+        //******产品页*********
+        
+        householdBestAndNewView.frame = CGRect(x: 0, y: hotRecommendLabel.frame.maxY, width: rect.width, height: 200)
+        self.addSubview(householdBestAndNewView)
     }
 }

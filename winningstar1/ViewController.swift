@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     let middleGuideView3 = UIView()
     var bottonMainView = BottonMainView()
     var isinit = false
+    let mainScrollview = UIScrollView()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "WinningStar"
@@ -23,12 +24,15 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         print("viewdidappear")
+        mainScrollview.frame = CGRect(x: 0, y: 64, width: ScreenWidth, height: ScreenHeight - 64)
+        self.view.addSubview(mainScrollview)
         //默认为true，App进入后台并恢复后会发生视图错误问题
         self.automaticallyAdjustsScrollViewInsets = false
         //加载顶部图片scrollview
         if !isinit{
-        topImageScrollView.frame = CGRect(x: 0, y: 64, width: ScreenWidth, height: 150)
-        self.view.addSubview(topImageScrollView)
+        topImageScrollView.frame = CGRect(x: 0, y: 0, width: ScreenWidth, height: 150)
+        //self.view.addSubview(topImageScrollView)
+        self.mainScrollview.addSubview(topImageScrollView)
         //topImageScrollView.setUI()
         NotificationCenter.default.addObserver(self, selector: #selector(topImageScrollViewUpdata), name: NSNotification.Name(rawValue: "I have got the fucking htmlText"), object: nil)
             isinit = true
@@ -40,9 +44,9 @@ class ViewController: UIViewController {
         middleGuideView1.backgroundColor = UIColor.red
         middleGuideView2.backgroundColor = UIColor.blue
         middleGuideView3.backgroundColor = UIColor.brown
-        self.view.addSubview(middleGuideView1)
-        self.view.addSubview(middleGuideView2)
-        self.view.addSubview(middleGuideView3)
+        self.mainScrollview.addSubview(middleGuideView1)
+        self.mainScrollview.addSubview(middleGuideView2)
+        self.mainScrollview.addSubview(middleGuideView3)
         middleGuideView1.isUserInteractionEnabled = true
         middleGuideView2.isUserInteractionEnabled = true
         middleGuideView3.isUserInteractionEnabled = true
@@ -55,8 +59,8 @@ class ViewController: UIViewController {
         
         //加载产品清单页
         
-        bottonMainView.frame = CGRect(x: 0, y: middleGuideView1.frame.maxY, width: ScreenWidth, height: ScreenHeight)
-        self.view.addSubview(bottonMainView)
+        bottonMainView.frame = CGRect(x: 0, y: middleGuideView1.frame.maxY, width: ScreenWidth, height: mainScrollview.frame.height - middleGuideView3.frame.maxY)
+        self.mainScrollview.addSubview(bottonMainView)
     }
     func bottonMainViewPage1() {
         bottonMainView.goPage1()
@@ -70,6 +74,22 @@ class ViewController: UIViewController {
     
     func topImageScrollViewUpdata() {
         topImageScrollView.upData()
+        //bottonMainView.reloadInputViews()
+        bottonMainView.view1.householdBestAndNewView.householdHotView?.loaddata()
+        
+        mainScrollview.contentSize = CGSize(width: 0, height: middleGuideView3.frame.maxY + bottonMainView.view1.householdBestAndNewView.frame.origin.y + (bottonMainView.view1.householdBestAndNewView.householdHotView?.contentSize.height)!)
+        
+        bottonMainView.frame.size = CGSize(width: bottonMainView.frame.size.width, height: bottonMainView.view1.householdBestAndNewView.frame.origin.y + (bottonMainView.view1.householdBestAndNewView.householdHotView?.contentSize.height)!)
+        
+        bottonMainView.view1.frame.size = CGSize(width: bottonMainView.frame.size.width, height: bottonMainView.view1.hotRecommendLabel.frame.maxY + (bottonMainView.view1.householdBestAndNewView.householdHotView?.contentSize.height)!)
+        bottonMainView.view1.householdBestAndNewView.frame.size = CGSize(width: bottonMainView.frame.size.width, height: (bottonMainView.view1.householdBestAndNewView.householdHotView?.contentSize.height)!)
+        
+        bottonMainView.view1.householdBestAndNewView.householdHotView?.frame.size = (bottonMainView.view1.householdBestAndNewView.householdHotView?.contentSize)!
+        print((bottonMainView.view1.householdBestAndNewView.householdHotView?.contentSize.height)!)
+        print((bottonMainView.view1.householdBestAndNewView.householdHotView?.contentSize.width)!)
+        
+        
+        //下载完毕更新界面
     }
     
     deinit {

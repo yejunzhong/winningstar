@@ -16,12 +16,13 @@ class BottonMainView: UIScrollView {
     override func draw(_ rect: CGRect) {
         // Drawing code
     }
-    */
+     */
+    let view1 = HouseholdGoodsView()
+    let view2 = ElectronicGoodsView()
+
     override func draw(_ rect: CGRect) {
         print(1)
-        let view1 = HouseholdGoodsView()
-        let view2 = ElectronicGoodsView()
-        view1.frame = CGRect(x: 0, y: 0, width: rect.width, height: rect.height)
+                view1.frame = CGRect(x: 0, y: 0, width: rect.width, height: rect.height)
         view2.frame = CGRect(x: ScreenWidth, y: 0, width: rect.width, height: rect.height)
         view1.backgroundColor = UIColor.green
         view2.backgroundColor = UIColor.brown
