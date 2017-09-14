@@ -23,8 +23,8 @@ class ViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("viewdidappear")
         mainScrollview.frame = CGRect(x: 0, y: 64, width: ScreenWidth, height: ScreenHeight - 64)
+        mainScrollview.backgroundColor = UIColor.green
         self.view.addSubview(mainScrollview)
         //默认为true，App进入后台并恢复后会发生视图错误问题
         self.automaticallyAdjustsScrollViewInsets = false
@@ -35,6 +35,7 @@ class ViewController: UIViewController {
         self.mainScrollview.addSubview(topImageScrollView)
         //topImageScrollView.setUI()
         NotificationCenter.default.addObserver(self, selector: #selector(topImageScrollViewUpdata), name: NSNotification.Name(rawValue: "I have got the fucking htmlText"), object: nil)
+            
             isinit = true
         }
         //加载中间导航3图片
@@ -56,11 +57,11 @@ class ViewController: UIViewController {
         middleGuideView2.addGestureRecognizer(middleGuideViewGR2)
         let middleGuideViewGR3 = UITapGestureRecognizer(target: self, action: #selector(showUserView))
         middleGuideView3.addGestureRecognizer(middleGuideViewGR3)
-        
         //加载产品清单页
-        
-        bottonMainView.frame = CGRect(x: 0, y: middleGuideView1.frame.maxY, width: ScreenWidth, height: mainScrollview.frame.height - middleGuideView3.frame.maxY)
+        bottonMainView.frame = CGRect(x: 0, y: middleGuideView1.frame.maxY, width: ScreenWidth, height: mainScrollview.bounds.height - middleGuideView1.frame.maxY)
+        bottonMainView.backgroundColor = UIColor.red
         self.mainScrollview.addSubview(bottonMainView)
+        //updataLayout()
     }
     func bottonMainViewPage1() {
         bottonMainView.goPage1()
@@ -73,25 +74,32 @@ class ViewController: UIViewController {
     }
     
     func topImageScrollViewUpdata() {
+        print("start")
         topImageScrollView.upData()
-        //bottonMainView.reloadInputViews()
+        print(1)
         bottonMainView.view1.householdBestAndNewView.householdHotView?.loaddata()
-        
-        mainScrollview.contentSize = CGSize(width: 0, height: middleGuideView3.frame.maxY + bottonMainView.view1.householdBestAndNewView.frame.origin.y + (bottonMainView.view1.householdBestAndNewView.householdHotView?.contentSize.height)!)
-        
-        bottonMainView.frame.size = CGSize(width: bottonMainView.frame.size.width, height: bottonMainView.view1.householdBestAndNewView.frame.origin.y + (bottonMainView.view1.householdBestAndNewView.householdHotView?.contentSize.height)!)
-        
-        bottonMainView.view1.frame.size = CGSize(width: bottonMainView.frame.size.width, height: bottonMainView.view1.hotRecommendLabel.frame.maxY + (bottonMainView.view1.householdBestAndNewView.householdHotView?.contentSize.height)!)
-        bottonMainView.view1.householdBestAndNewView.frame.size = CGSize(width: bottonMainView.frame.size.width, height: (bottonMainView.view1.householdBestAndNewView.householdHotView?.contentSize.height)!)
-        
-        bottonMainView.view1.householdBestAndNewView.householdHotView?.frame.size = (bottonMainView.view1.householdBestAndNewView.householdHotView?.contentSize)!
-        print((bottonMainView.view1.householdBestAndNewView.householdHotView?.contentSize.height)!)
-        print((bottonMainView.view1.householdBestAndNewView.householdHotView?.contentSize.width)!)
-        
+        bottonMainView.view1.householdBestAndNewView.householdNewView?.loaddata()
+        print(2)
+        updataLayout()
         
         //下载完毕更新界面
     }
-    
+    func updataLayout() {
+        print(middleGuideView3.frame.maxY)
+        print(bottonMainView.view1.householdBestAndNewView.frame.origin.y)
+        print(bottonMainView.view1.householdBestAndNewView.householdHotView?.contentSize.height)
+        mainScrollview.contentSize = CGSize(width: 0, height: middleGuideView3.frame.maxY + bottonMainView.view1.householdBestAndNewView.frame.origin.y + (bottonMainView.view1.householdBestAndNewView.householdHotView?.contentSize.height)!)
+        print(3)
+        bottonMainView.frame.size = CGSize(width: bottonMainView.frame.size.width, height: bottonMainView.view1.householdBestAndNewView.frame.origin.y + (bottonMainView.view1.householdBestAndNewView.householdHotView?.contentSize.height)!)
+        print(4)
+        bottonMainView.view1.frame.size = CGSize(width: bottonMainView.frame.size.width, height: bottonMainView.view1.hotRecommendLabel.frame.maxY + (bottonMainView.view1.householdBestAndNewView.householdHotView?.contentSize.height)!)
+        print(5)
+        bottonMainView.view1.householdBestAndNewView.frame.size = CGSize(width: bottonMainView.frame.size.width, height: (bottonMainView.view1.householdBestAndNewView.householdHotView?.contentSize.height)!)
+        print(6)
+        //bottonMainView.view1.householdBestAndNewView.householdHotView?.frame.size = CGSize(width: bottonMainView.frame.size.width, height: (bottonMainView.view1.householdBestAndNewView.householdHotView?.contentSize.height)!)
+        
+        print("done")
+    }
     deinit {
         NotificationCenter.default.removeObserver(self)
     }

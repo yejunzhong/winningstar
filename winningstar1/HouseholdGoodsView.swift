@@ -47,6 +47,9 @@ class HouseholdGoodsView: UIView {
         hotRecommendLabel.textColor = UIColor.white
         hotRecommendLabel.backgroundColor = UIColor.gray
         hotRecommendLabel.textAlignment = .center
+        hotRecommendLabel.isUserInteractionEnabled = true
+        let hotRecommendLabelGR = UITapGestureRecognizer(target: self, action: #selector(tapHot))
+        hotRecommendLabel.addGestureRecognizer(hotRecommendLabelGR)
         self.addSubview(hotRecommendLabel)
         
         newForYouLabel.frame = CGRect(x: rect.width/2, y: goodsImageView.frame.maxY, width: rect.width/2, height: 50)
@@ -54,10 +57,18 @@ class HouseholdGoodsView: UIView {
         newForYouLabel.textColor = UIColor.white
         newForYouLabel.backgroundColor = UIColor.gray
         newForYouLabel.textAlignment = .center
+        newForYouLabel.isUserInteractionEnabled = true
+        let newForYouLabelGR = UITapGestureRecognizer(target: self, action: #selector(tapNew))
+        newForYouLabel.addGestureRecognizer(newForYouLabelGR)
         self.addSubview(newForYouLabel)
         //******产品页*********
-        
-        householdBestAndNewView.frame = CGRect(x: 0, y: hotRecommendLabel.frame.maxY, width: rect.width, height: 200)
+        householdBestAndNewView.frame = CGRect(x: 0, y: hotRecommendLabel.frame.maxY, width: rect.width, height: ScreenHeight - 364 - ScreenWidth * 2/5)
         self.addSubview(householdBestAndNewView)
+    }
+    func tapHot() {
+        self.householdBestAndNewView.goHotView()
+    }
+    func tapNew() {
+        self.householdBestAndNewView.goNewView()
     }
 }

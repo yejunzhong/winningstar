@@ -8,11 +8,12 @@
 
 import Foundation
 
-class HouseholdDataSource{
-    var hotImageUrlArray:NSMutableArray{
+class HouseholdHotDataSource:HouseholdDataSource{
+    
+    var imageDataArray:NSMutableArray{
         get{
             let temArray:NSMutableArray = []
-            if let hotHtmltext = self.Stringcut(htmlText, start: "search.php?intro=new", end: "container sale_img clearfix"){
+            if let hotHtmltext = self.Stringcut(htmlText, start: "search.php?intro=best", end: "cate_ico_all floor-fixed-panel"){
                 var ht = hotHtmltext
                 for _ in 0...9{
                     if let url = self.Stringcut(ht, start: "img src=\"", end: "\" border=\"0\""){
@@ -49,7 +50,7 @@ class HouseholdDataSource{
     var titleArray:NSMutableArray{
         get{
             let temArray:NSMutableArray = []
-            if let hotHtmltext = self.Stringcut(htmlText, start: "search.php?intro=new", end: "container sale_img clearfix"){
+            if let hotHtmltext = self.Stringcut(htmlText, start: "search.php?intro=best", end: "cate_ico_all floor-fixed-panel"){
                 var ht = hotHtmltext
                 for _ in 0...9{
                     if let title = self.Stringcut(ht, start: "alt=\"", end: "\" /></a>"){
@@ -82,7 +83,7 @@ class HouseholdDataSource{
     var priceArray:NSMutableArray{
         get{
             let temArray:NSMutableArray = []
-            if let hotHtmltext = self.Stringcut(htmlText, start: "search.php?intro=new", end: "container sale_img clearfix"){
+            if let hotHtmltext = self.Stringcut(htmlText, start: "search.php?intro=best", end: "cate_ico_all floor-fixed-panel"){
                 var ht = hotHtmltext
                 for _ in 0...9{
                     if let title = self.Stringcut(ht, start: "\"shop_s shop_sf\">", end: "</font>"){

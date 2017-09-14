@@ -7,7 +7,11 @@
 //
 
 import UIKit
-
+protocol HouseholdDataSource {
+    var imageDataArray:NSMutableArray{get}
+    var titleArray:NSMutableArray{get}
+    var priceArray:NSMutableArray{get}
+}
 class GoodsCollectionView: UICollectionView,UICollectionViewDataSource,UICollectionViewDelegate {
 
     /*
@@ -20,22 +24,27 @@ class GoodsCollectionView: UICollectionView,UICollectionViewDataSource,UICollect
     var imageData = [Data]()
     var title = [String]()
     var price = [String]()
-    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+    var goodsDataSource : HouseholdDataSource?
+    required init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout,goodsDS:HouseholdDataSource) {
         super.init(frame: frame, collectionViewLayout: layout)
-        
         self.delegate = self
         self.dataSource = self
-        
         self.register(GoodsCellCollectionViewCell.self, forCellWithReuseIdentifier: "goodsCell")
+        goodsDataSource = goodsDS
         loaddata()
     }
     func loaddata() {
-        let dataSource = HouseholdDataSource()
-        imageData = dataSource.hotImageUrlArray as! [Data]
-        title = dataSource.titleArray as! [String]
-        price = dataSource.priceArray as! [String]
+        imageData = goodsDataSource?.imageDataArray as! [Data]
+        title = goodsDataSource?.titleArray as! [String]
+        price = goodsDataSource?.priceArray as! [String]
         self.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        print(title.count)
+        print("title")
         self.reloadData()
+        let w = self.bounds.width
+        let size = CGSize(width: 0, height: (w - 25) * 5 + 10)
+        self.contentSize = size
+        self.frame.size = CGSize(width: self.frame.size.width, height: size.height)
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

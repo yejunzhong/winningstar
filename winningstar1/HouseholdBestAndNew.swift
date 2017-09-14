@@ -18,20 +18,38 @@ class HouseholdBestAndNew: UIScrollView {
     }
     */
     var householdHotView : GoodsCollectionView?
+    var householdNewView : GoodsCollectionView?
     override func draw(_ rect: CGRect) {
         self.isPagingEnabled = true
         self.bounces = false
         self.showsHorizontalScrollIndicator = false
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width:(rect.width - 35) / 2 ,height:rect.width - 35)
+        let layout1 = UICollectionViewFlowLayout()
+        layout1.itemSize = CGSize(width:(rect.width - 35) / 2 ,height:rect.width - 35)
         //列间距,行间距,偏移
-        layout.minimumInteritemSpacing = 15
-        layout.minimumLineSpacing = 10
-        layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10)
-        let rect = CGRect(x: 0, y: 0, width: rect.width, height: rect.height)
-        householdHotView = GoodsCollectionView(frame: rect, collectionViewLayout: layout)
+        layout1.minimumInteritemSpacing = 15
+        layout1.minimumLineSpacing = 10
+        layout1.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10)
+        let hotRect = CGRect(x: 0, y: 0, width: rect.width, height: rect.height)
+        householdHotView = GoodsCollectionView(frame: hotRect, collectionViewLayout: layout1, goodsDS: HouseholdHotDataSource())
         self.addSubview(householdHotView!)
+        let newRect = CGRect(x: rect.width, y: 0, width: rect.width, height: rect.height)
+        let layout2 = UICollectionViewFlowLayout()
+        layout2.itemSize = CGSize(width:(rect.width - 35) / 2 ,height:rect.width - 35)
+        //列间距,行间距,偏移
+        layout2.minimumInteritemSpacing = 15
+        layout2.minimumLineSpacing = 10
+        layout2.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10)
+        householdNewView = GoodsCollectionView(frame: newRect, collectionViewLayout: layout2, goodsDS: HouseholdNewDataSource())
+        self.addSubview(householdNewView!)
+        //print("done")
     }
-    
+    func goHotView() {
+        let point = CGPoint(x: 0, y: 0)
+        self.setContentOffset(point, animated: false)
+    }
+    func goNewView() {
+        let point = CGPoint(x: self.bounds.width, y:0 )
+        self.setContentOffset(point, animated: false)
+    }
 
 }

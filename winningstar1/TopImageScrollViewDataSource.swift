@@ -11,32 +11,38 @@ import Foundation
 class TopImageScrollViewDataSource {
     var imageUrlArray:NSMutableArray?{
         get{
-            let temArray: NSMutableArray = []
+            var temArray = [String]()
             let finalArray: NSMutableArray = []
             if let topImageUrls = self.Stringcut(htmlText, start: "<div class=\"index_box_po", end: "<span class=\"prev iconfont icon-back\"></span>"){
                 var temUrls = topImageUrls
             for _ in 0..<10{
                 if let url = self.Stringcut(temUrls, start: "<li _src=\"url(", end: ")\" style="){
-                    temArray.add(url)
+                    temArray.append(url)
                     let h = temUrls.range(of: "target=\"_blank\"")
                     temUrls = temUrls.substring(from: (h?.upperBound)!)
                 }else{
                     break
                 }
             }
+                print("0..10")
             if temArray.count > 0{
-                let temArray2:NSMutableArray = []
-                for i in 0..<temArray.count{
-                    let urlStr = NSURL(string: temArray[i] as! String)
-                    let data = NSData(contentsOf:urlStr! as URL)
-                    temArray2.add(data!)
+//                let temArray2:NSMutableArray = []
+//                for i in 0..<temArray.count{
+//                    print(temArray[i])
+//                    let urlStr = NSURL(string: temArray[i])
+//                    print("string to url")
+//                    //let data = NSData(contentsOf:urlStr! as URL)//效率太低
+//                    print("url to data")
+//                    temArray2.add(urlStr!)
+//                    print("transform")
+//                }
+                finalArray.add(temArray[temArray.count - 1])
+                for i in 0..<temArray.count {
+                    finalArray.add(temArray[i])
                 }
-                finalArray.add(temArray2[temArray2.count - 1])
-                for i in 0..<temArray2.count {
-                    finalArray.add(temArray2[i])
-                }
-                finalArray.add(temArray2[0])
+                finalArray.add(temArray[0])
             }
+                print("temarray"+"\(temArray.count)")
             
             if let a = defaults.object(forKey: "topImages") as? NSMutableArray{
                 if finalArray == a{

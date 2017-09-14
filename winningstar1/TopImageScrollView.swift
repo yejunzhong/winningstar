@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class TopImageScrollView: UIScrollView,UIScrollViewDelegate {
 
@@ -30,12 +31,15 @@ class TopImageScrollView: UIScrollView,UIScrollViewDelegate {
         self.addImageView(imageArray: dataSource!)
     }
     func upData() {
+        print("upData")
         dataSource = TopImageScrollViewDataSource().imageUrlArray
-        
+        print("getdataSource")
         let _ = self.subviews.map {
             $0.removeFromSuperview()
         }
+        print("remove")
         self.addImageView(imageArray: dataSource!)
+        print("addsource")
     }
     //配置scrollview循环滚动
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -67,10 +71,13 @@ class TopImageScrollView: UIScrollView,UIScrollViewDelegate {
         }
     }
     //给scroll加载图片
+    //extension UIImageView:
     fileprivate func addImageView(imageArray:NSArray){
         for i in 0..<imageArray.count {
-            let image = UIImage(data: imageArray[i] as! Data)
-            let imageView = UIImageView(image: image)
+            //let image = UIImage(data: imageArray[i] as! Data)
+            let url = URL(string: imageArray[i] as! String)
+            let imageView = UIImageView()
+            imageView.kf.setImage(with: url)
             imageView.frame = CGRect(x: CGFloat(i) * ScreenWidth, y: 0, width: ScreenWidth, height: self.bounds.height)
             self.addSubview(imageView)
         }

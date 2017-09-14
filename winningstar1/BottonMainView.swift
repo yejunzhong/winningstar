@@ -21,8 +21,7 @@ class BottonMainView: UIScrollView {
     let view2 = ElectronicGoodsView()
 
     override func draw(_ rect: CGRect) {
-        print(1)
-                view1.frame = CGRect(x: 0, y: 0, width: rect.width, height: rect.height)
+        view1.frame = CGRect(x: 0, y: 0, width: rect.width, height: rect.height)
         view2.frame = CGRect(x: ScreenWidth, y: 0, width: rect.width, height: rect.height)
         view1.backgroundColor = UIColor.green
         view2.backgroundColor = UIColor.brown
@@ -30,11 +29,9 @@ class BottonMainView: UIScrollView {
         self.addSubview(view2)
         self.contentSize = CGSize(width: rect.width * 2, height: 0)
         //self.isPagingEnabled = true
-        print(2)
         self.showsHorizontalScrollIndicator = false
         self.isScrollEnabled = false
         self.bounces = false
-        print(3)
     }
     func goPage1() {
         let page1Point = CGPoint(x: 0, y: 0)

@@ -7,4 +7,5 @@ target 'winningstar1' do
 
   # Pods for winningstar1
 pod 'Alamofire', '~> 4.4'
+pod 'Kingfisher', '~> 3.0'
 end
